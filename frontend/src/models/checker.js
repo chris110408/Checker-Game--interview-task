@@ -18,7 +18,6 @@ const Model = {
   namespace: 'checker',
 
   state: {
-    activePiece: null,
     gameId: null,
     isRedRound: true,
     currentData: [],
