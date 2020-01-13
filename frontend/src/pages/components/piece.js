@@ -8,7 +8,6 @@ const generatePieceColor = pieceColor => {
 };
 
 const setPieceShape = (row, pieceColor) => {
-
   if (row === 0 && pieceColor === 'r') {
     return '0';
   }
@@ -31,15 +30,11 @@ const Piece = ({ RowIndex, ColIndex, pieceColor, showPossibleMove, activePiece, 
     }),
     canDrag: () => {
       if (activePiece) {
-        if (
-          `${RowIndex}-${ColIndex}` === activePiece.key && isRedRound
-            ? pieceColor === 'r'
-            : pieceColor === 'b'
-        ) {
-          return true;
+        if (`${RowIndex}-${ColIndex}` === activePiece.key) {
+          return isRedRound ? pieceColor === 'r' : pieceColor === 'b';
         }
+        return false;
       }
-      return false;
     },
   });
 
@@ -72,6 +67,8 @@ Piece.propTypes = {
   RowIndex: PropTypes.number,
   ColIndex: PropTypes.number,
   pieceColor: PropTypes.string,
-  showPossibleMove:PropTypes.func, activePiece:PropTypes.object, isRedRound:PropTypes.bool
+  showPossibleMove: PropTypes.func,
+  activePiece: PropTypes.object,
+  isRedRound: PropTypes.bool,
 };
 export default Piece;
