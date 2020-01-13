@@ -1,7 +1,7 @@
 import React,{useRef} from 'react';
 import PropTypes from 'prop-types';
-import { useDrag } from 'react-dnd'
-
+import { useDrag ,DragPreviewImage} from 'react-dnd'
+import moveImage from '../../assets/move.png'
 
 const generatePieceColor = pieceColor => {
   return pieceColor === 'r' ? 'red' : 'black';
@@ -25,7 +25,7 @@ const ItemTypes =  {
 const Piece = ({ RowIndex, ColIndex, pieceColor }) => {
 
   const ref = useRef(null)
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag,preview] = useDrag({
     item: { type: ItemTypes.PIECE },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -36,7 +36,7 @@ const Piece = ({ RowIndex, ColIndex, pieceColor }) => {
   })
 
 
-
+  const opacity = isDragging ? 0.5 : 1
   const StyleObj = {
     margin: 'auto auto',
     height: '38px',
@@ -51,7 +51,8 @@ const Piece = ({ RowIndex, ColIndex, pieceColor }) => {
   drag(ref)
   return (
     <>
-      <div ref={ref} onClick={() => {}} style={{ ...StyleObj }} />
+      <DragPreviewImage connect={preview} src={moveImage}/>
+      <div ref={ref} onClick={() => {}} style={{ ...StyleObj ,opacity}} />
     </>
   );
 };
