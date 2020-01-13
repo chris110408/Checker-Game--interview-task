@@ -11,10 +11,11 @@ const isKing = (row, pieceColor) => {
 const mutedeleteTypeGameData = currentData => {
   const newData = [].concat(currentData);
   newData.forEach(rowData => {
-    rowData.map(item => {
+    return rowData.map(item => {
       if (item.hasOwnProperty('type')) {
         item.type = null;
       }
+      return item
     });
   });
   return newData;
@@ -205,6 +206,7 @@ const muteGameData = (combinedMovesObj, currentData) => {
       if (combinedMovesObj[`${key}`]) {
         item.type = combinedMovesObj[`${key}`].type;
       }
+      return item
     });
   });
   return newData

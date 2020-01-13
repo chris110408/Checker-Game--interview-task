@@ -29,6 +29,7 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
   saveData.game = currentData;
   saveData.gameId = gameId;
   const [activePiece, setActivePiece] = useState(null);
+  /*eslint-disable */
   useEffect(() => {
     dispatch({
       type: 'checker/getGameData',
@@ -38,8 +39,8 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
     return () => {
       window.removeEventListener('beforeunload', _uploadListener);
     };
-  }, [_uploadListener, dispatch]);
-
+  }, []);
+  /*eslint-enable */
   const ListenerClosure = data => {
     const uploadListener = event => {
       alert(1)
@@ -104,8 +105,6 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
     }
     const newGameData =  mutedeleteTypeGameData(currentData);
     setGameData([].concat(newGameData));
-    const moves = [];
-    const jumps = [];
     const possibleMoves = getPossibleMoves(intRow, intCol, pieceColor,currentData);
     const jumpableMoves = getJumpableMoves(possibleMoves);
     const jumpMoves = jumpableMoves.reduce((acc, jumpableMove) => {
@@ -116,7 +115,6 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
       } else {
         return acc.concat(getRightjumpMoves([], intRow, intCol, pieceColor,currentData));
       }
-      return acc;
     }, []);
     const directMoves = getDirectMoves(possibleMoves);
     const TempActivePiece = {
@@ -162,6 +160,8 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
         }
 
         item.type = null;
+
+        return item
       });
     });
 

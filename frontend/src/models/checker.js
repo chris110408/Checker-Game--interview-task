@@ -1,9 +1,11 @@
+import {
+  getGameDataRequest,
+  createGameDataRequest,
+  updateGameDataRequest,
+} from '@/services/checker';
 
-import { getGameDataRequest, createGameDataRequest,updateGameDataRequest } from '@/services/checker';
-
-import {notification} from "antd";
-import generateGameData from "../utils/generateGameData";
-
+import { notification } from 'antd';
+import generateGameData from '../utils/generateGameData';
 
 const openNotificationWithIcon = (type, title, msg) => {
   notification[type]({
@@ -12,36 +14,30 @@ const openNotificationWithIcon = (type, title, msg) => {
   });
 };
 
-
-
 const Model = {
   namespace: 'checker',
 
   state: {
-    activePiece:null,
-    gameId:null,
+    activePiece: null,
+    gameId: null,
     isRedRound: true,
-    currentData:[],
+    currentData: [],
   },
 
   effects: {
     *getGameData({ payload }, { call, put }) {
-
       const response = yield call(getGameDataRequest, payload);
       const { error, msg } = response;
 
       if (error) {
-        openNotificationWithIcon(
-          'error'
-        );
+        openNotificationWithIcon('error');
       }
       if (msg) {
-
-        let _data =response.data[0]
-        if(!_data){
+        let _data = response.data[0];
+        if (!_data) {
           _data = yield call(generateGameData);
         }
-        console.log(_data)
+        console.log(_data);
         yield put({
           type: 'setCurrentData',
           payload: _data.game,
@@ -55,30 +51,21 @@ const Model = {
           payload: _data._id,
         });
 
-        openNotificationWithIcon(
-          'success','success'
-        );
+        openNotificationWithIcon('success', 'success');
       }
     },
-    *setGameData( {payload} , { call, put }) {
-
-      console.log(payload)
-      const {id} = payload;
-      let response
-      if(id){
-        delete payload.id
-        response = yield call(updateGameDataRequest, {newValue:payload,id});
-      }else{
-        console.log(payload)
+    *setGameData({ payload }, { call, put }) {
+      const { id } = payload;
+      let response;
+      if (id) {
+        delete payload.id;
+        response = yield call(updateGameDataRequest, { newValue: payload, id });
+      } else {
         response = yield call(createGameDataRequest, payload);
       }
-
       const { error, msg } = response;
-
       if (error) {
-        openNotificationWithIcon(
-          'error'
-        );
+        openNotificationWithIcon('error');
       }
       if (msg) {
         yield put({
@@ -86,34 +73,28 @@ const Model = {
         });
       }
     },
-
-
   },
 
   reducers: {
     setIsRedRound(state, { payload }) {
-
       return {
         ...state,
-        isRedRound:payload,
+        isRedRound: payload,
       };
     },
     setCurrentData(state, { payload }) {
-      console.log('setecurrentdata')
+      console.log('setecurrentdata');
       return {
         ...state,
-        currentData:payload,
+        currentData: payload,
       };
     },
     setGameId(state, { payload }) {
-
       return {
         ...state,
-        gameId:payload,
+        gameId: payload,
       };
     },
-
-
   },
 };
 

@@ -3,7 +3,6 @@ import {connect} from "dva";
 import Spinner from "react-spinkit";
 import React from 'react'
 import PropTypes from 'prop-types';
-import Square from "../pages/components/square";
 
 function BasicLayout(props) {
 

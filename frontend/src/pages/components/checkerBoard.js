@@ -2,7 +2,7 @@ import React from 'react';
 import Square from './square';
 import PropTypes from 'prop-types';
 
-const GameBoard = ({ gameData,dropPiece, children }) => {
+const GameBoard = ({ gameData, dropPiece, children }) => {
   const RenderBoard = gameData => {
     return gameData.map((RowItems, RowIndex) => {
       return RowItems.map((ColItem, ColIndex) => {
@@ -21,8 +21,6 @@ const GameBoard = ({ gameData,dropPiece, children }) => {
           </Square>
         );
       });
-
-      return null;
     });
   };
 
@@ -32,7 +30,7 @@ const GameBoard = ({ gameData,dropPiece, children }) => {
 GameBoard.propTypes = {
   gameData: PropTypes.array,
   children: PropTypes.node,
-  dropPiece:PropTypes.func
+  dropPiece: PropTypes.func,
 };
 
 export default GameBoard;

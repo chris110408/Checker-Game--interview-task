@@ -7,7 +7,7 @@ const ItemTypes = {
 };
 
 const Square = ({ dropPiece,RowIndex, ColIndex, pieceColor, type, children }) => {
-  const [{ isOver, canDrop }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: ItemTypes.PIECE,
     canDrop: () =>  {return type && type!=='active'},
     drop: () => {dropPiece(type,RowIndex,ColIndex)},
