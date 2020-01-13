@@ -20,17 +20,49 @@ import {
 } from "../utils/helper"
 import React,{useState,useEffect} from 'react';
 
-const Gamedata = generateGameData();
-const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) => {
-  const [activePiece, setActivePiece] = useState(null);
 
+
+let saveData = { game: [], isRedRound: null, gameId: null };
+const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) => {
   const { isRedRound, currentData, gameId } = checker;
+  saveData.isRedRound = isRedRound;
+  saveData.game = currentData;
+  saveData.gameId = gameId;
+  const [activePiece, setActivePiece] = useState(null);
   useEffect(() => {
     dispatch({
       type: 'checker/getGameData',
     });
-  }, [dispatch]);
+    setupBeforeUnloadListener(_uploadListener);
 
+    return () => {
+      window.removeEventListener('beforeunload', _uploadListener);
+    };
+  }, [_uploadListener, dispatch]);
+
+  const ListenerClosure = data => {
+    const uploadListener = event => {
+      alert(1)
+      saveGame(data);
+      event.returnValue = `Are you sure you want to leave?`;
+    };
+    return uploadListener;
+  };
+  const _uploadListener = ListenerClosure(saveData);
+
+  const setupBeforeUnloadListener = Listener => {
+    window.addEventListener('beforeunload', Listener);
+  };
+  const reset = () => {
+    const data = generateGameData();
+    setGameRound(true);
+    setGameData([].concat(data.game));
+    saveData.game =data.game
+    saveGame(data.game);
+    dispatch({
+      type: 'checker/getGameData',
+    });
+  };
 
   const setGameRound = _isRedRound => {
     dispatch({
@@ -44,9 +76,16 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
       payload: _data,
     });
   };
-
-  const reset = () => {};
-  const saveGame = () => {};
+  const saveGame = () => {
+    dispatch({
+      type: 'checker/setGameData',
+      payload: {
+        game: saveData.game,
+        id: saveData.gameId,
+        isRedRound: saveData.isRedRound,
+      },
+    });
+  };
 
   const switchRound = () => {
     setGameRound(!isRedRound);
