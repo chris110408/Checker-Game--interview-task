@@ -37,7 +37,6 @@ const Model = {
         if (!_data) {
           _data = yield call(generateGameData);
         }
-        console.log(_data);
         yield put({
           type: 'setCurrentData',
           payload: _data.game,
@@ -50,8 +49,6 @@ const Model = {
           type: 'setGameId',
           payload: _data._id,
         });
-
-        openNotificationWithIcon('success', 'success');
       }
     },
     *setGameData({ payload }, { call, put }) {
@@ -83,7 +80,6 @@ const Model = {
       };
     },
     setCurrentData(state, { payload }) {
-      console.log('setecurrentdata');
       return {
         ...state,
         currentData: payload,
