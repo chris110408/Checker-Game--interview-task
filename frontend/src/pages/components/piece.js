@@ -71,5 +71,6 @@ Piece.propTypes = {
   RowIndex: PropTypes.number,
   ColIndex: PropTypes.number,
   pieceColor: PropTypes.string,
+  showPossibleMove:PropTypes.func, activePiece:PropTypes.object, isRedRound:PropTypes.bool
 };
 export default Piece;
