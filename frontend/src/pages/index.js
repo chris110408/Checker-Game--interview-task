@@ -1,23 +1,19 @@
 import styles from './index.css';
 import { Card, Icon, Tooltip } from 'antd';
-import PropTypes from "prop-types";
-import GameBoard from "./components/checkerBoard"
-import generateGameData from "../utils/generateGameData"
-import Piece from "./components/piece";
+import PropTypes from 'prop-types';
+import GameBoard from './components/checkerBoard';
+import generateGameData from '../utils/generateGameData';
+import Piece from './components/piece';
 
+const Gamedata = generateGameData();
+const CheckerGame = props => {
+  const { game: currentData } = Gamedata;
 
-const Gamedata = generateGameData()
-const CheckerGame = (props)=>{
-
-  const {game:currentData} = Gamedata
-
-  const reset =() =>{}
-  const saveGame =() =>{}
-
+  const reset = () => {};
+  const saveGame = () => {};
 
   return (
     <Card
-
       actions={[
         <Tooltip key='reset' title={'Restart Game'}>
           <Icon type='reload' key='reset' onClick={reset} />
@@ -34,7 +30,6 @@ const CheckerGame = (props)=>{
       </div>
     </Card>
   );
-}
+};
 
-
-export default CheckerGame
+export default CheckerGame;
