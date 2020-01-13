@@ -2,7 +2,8 @@ import styles from './index.css';
 import {connect} from "dva";
 import Spinner from "react-spinkit";
 import React from 'react'
-
+import PropTypes from 'prop-types';
+import Square from "../pages/components/square";
 
 function BasicLayout(props) {
 
@@ -20,6 +21,11 @@ function BasicLayout(props) {
     </div>
   );
 }
+
+BasicLayout.propTypes = {
+  checker: PropTypes.object,
+  gettingGameData: PropTypes.bool
+};
 
 export default connect(({checker,loading}) => ({
   checker: checker,
