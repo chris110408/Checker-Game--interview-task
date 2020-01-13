@@ -5,19 +5,15 @@
   text-align: center;
 }
 
-.welcome {
-  height: 512px;
-  background: url(../assets/yay.jpg) no-repeat center 0;
-  background-size: 512px 512px;
-}
 
-.list {
-  font-size: 1.2em;
-  margin: 1.8em 0 0;
-  list-style: none;
-  line-height: 1.5em;
-}
-
-.list code {
-  background: #f7f7f7;
+.board {
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ddd;
+  box-shadow:5px 5px 5px #aaaaaa;
+  cursor: pointer;
 }

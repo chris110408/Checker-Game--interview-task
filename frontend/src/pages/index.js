@@ -1,13 +1,19 @@
 import styles from './index.css';
-import generateGameData from '../utils/generateGameData';
 import { Card, Icon, Tooltip } from 'antd';
+import PropTypes from "prop-types";
+import GameBoard from "./checkerBoard"
+import generateGameData from "../utils/generateGameData"
 
 
+const Gamedata = generateGameData()
 const CheckerGame = (props)=>{
 
+  const {game:currentData} = Gamedata
 
   const reset =() =>{}
   const saveGame =() =>{}
+
+
   return (
     <Card
 
@@ -20,7 +26,10 @@ const CheckerGame = (props)=>{
         </Tooltip>,
       ]}
     >
-
+      <div className={styles.board}>
+        <GameBoard gameData={currentData}>
+        </GameBoard>
+      </div>
     </Card>
   );
 }
