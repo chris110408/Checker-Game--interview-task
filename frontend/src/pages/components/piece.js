@@ -8,10 +8,11 @@ const generatePieceColor = pieceColor => {
 };
 
 const setPieceShape = (row, pieceColor) => {
-  if (row === '0' && pieceColor === 'r') {
+
+  if (row === 0 && pieceColor === 'r') {
     return '0';
   }
-  if (row === '7' && pieceColor === 'b') {
+  if (row === 7 && pieceColor === 'b') {
     return '0';
   }
   return '40px';
