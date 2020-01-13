@@ -1,9 +1,9 @@
 import styles from './index.css';
 import { Card, Icon, Tooltip } from 'antd';
 import PropTypes from "prop-types";
-import GameBoard from "./checkerBoard"
+import GameBoard from "./components/checkerBoard"
 import generateGameData from "../utils/generateGameData"
-import Piece from "./piece";
+import Piece from "./components/piece";
 
 
 const Gamedata = generateGameData()
