@@ -1,17 +1,29 @@
 import styles from './index.css';
+import generateGameData from '../utils/generateGameData';
+import { Card, Icon, Tooltip } from 'antd';
 
-export default function() {
+
+const CheckerGame = (props)=>{
+
+
+  const reset =() =>{}
+  const saveGame =() =>{}
   return (
-    <div className={styles.normal}>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
-        <li>
-          <a href="https://umijs.org/guide/getting-started.html">
-            Getting Started
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Card
+
+      actions={[
+        <Tooltip key='reset' title={'Restart Game'}>
+          <Icon type='reload' key='reset' onClick={reset} />
+        </Tooltip>,
+        <Tooltip key='save' title={'Save Game'}>
+          <Icon type='save' key='save' onClick={saveGame} />
+        </Tooltip>,
+      ]}
+    >
+
+    </Card>
   );
 }
+
+
+export default CheckerGame
