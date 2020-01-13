@@ -12,7 +12,8 @@
 
 # misc
 .DS_Store
-
+/logs
+/run
 # umi
 .umi
 .umi-production
