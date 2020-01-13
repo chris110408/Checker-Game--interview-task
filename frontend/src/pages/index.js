@@ -175,6 +175,7 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
 
   return (
     <Card
+      loading={gettingGameData || submittingGameData}
       actions={[
         <Tooltip key='reset' title={'Restart Game'}>
           <Icon type='reload' key='reset' onClick={reset} />
@@ -199,6 +200,12 @@ const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) 
   );
 };
 
+CheckerGame.propTypes = {
+  checker: PropTypes.object,
+  gettingGameData: PropTypes.bool,
+  submittingGameData:PropTypes.bool,
+  dispatch:PropTypes.func
+};
 
 export default connect(({ checker, loading }) => ({
   checker: checker,
