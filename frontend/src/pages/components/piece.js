@@ -1,5 +1,7 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import PropTypes from 'prop-types';
+import { useDrag } from 'react-dnd'
+
 
 const generatePieceColor = pieceColor => {
   return pieceColor === 'r' ? 'red' : 'black';
@@ -15,7 +17,26 @@ const setPieceShape = (row, pieceColor) => {
   return '40px';
 };
 
+const ItemTypes =  {
+  PIECE: 'PIECE',
+}
+
+
 const Piece = ({ RowIndex, ColIndex, pieceColor }) => {
+
+  const ref = useRef(null)
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: ItemTypes.PIECE },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    canDrag: ()=>{
+      return true
+    },
+  })
+
+
+
   const StyleObj = {
     margin: 'auto auto',
     height: '38px',
@@ -27,9 +48,10 @@ const Piece = ({ RowIndex, ColIndex, pieceColor }) => {
     cursor: 'move',
   };
 
+  drag(ref)
   return (
     <>
-      <div onClick={() => {}} style={{ ...StyleObj }} />
+      <div ref={ref} onClick={() => {}} style={{ ...StyleObj }} />
     </>
   );
 };

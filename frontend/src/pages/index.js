@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import GameBoard from './components/checkerBoard';
 import generateGameData from '../utils/generateGameData';
 import Piece from './components/piece';
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 
 const Gamedata = generateGameData();
 const CheckerGame = props => {
@@ -23,11 +25,13 @@ const CheckerGame = props => {
         </Tooltip>,
       ]}
     >
-      <div className={styles.board}>
-        <GameBoard gameData={currentData}>
-          <Piece />
-        </GameBoard>
-      </div>
+      <DndProvider backend={Backend}>
+        <div className={styles.board}>
+          <GameBoard gameData={currentData}>
+            <Piece />
+          </GameBoard>
+        </div>
+      </DndProvider>
     </Card>
   );
 };

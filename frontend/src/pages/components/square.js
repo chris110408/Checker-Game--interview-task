@@ -1,7 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDrop } from 'react-dnd'
+
+const ItemTypes =  {
+  PIECE: 'PIECE',
+}
 
 const Square = ({ RowIndex, ColIndex, pieceColor, type, children }) => {
+
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept:  ItemTypes.PIECE,
+    drop: () => {console.log('drop')},
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+      canDrop: !!monitor.canDrop(),
+    }),
+  })
+
+
+
   const squareColor = (row, col, type) => {
     if (type) {
       if (type === 'active') {
@@ -18,6 +35,7 @@ const Square = ({ RowIndex, ColIndex, pieceColor, type, children }) => {
 
   return (
     <div
+      ref={drop}
       row={RowIndex}
       col={ColIndex}
       key={`${RowIndex}-${ColIndex}`}
