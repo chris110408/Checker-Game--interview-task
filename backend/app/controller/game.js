@@ -3,12 +3,26 @@ const Controller = require("egg").Controller;
 class GameController extends Controller {
   constructor(ctx) {
     super(ctx);
+    this.GameDataValidate = {
+      isRedRound:'boolean',
+      game:'array',
+      childrens: {
+        type: 'array',
+        itemType: 'object',
+        required: false,
+        rule: {
+          row: 'int',
+          col: 'int',
+          pieceColor: {type: 'string', required: false}
+        }
+      },
+    }
   }
 
   // create game
   async create() {
     const { ctx, service } = this;
-
+    ctx.validate(this.GameDataValidate)
     const payload = ctx.request.body || {};
     // call Service
     const res = await service.game.create(payload);
@@ -26,6 +40,7 @@ class GameController extends Controller {
   // update game
   async update() {
     const { ctx, service } = this;
+    ctx.validate(this.GameDataValidate)
     const { id } = ctx.params;
     const payload = ctx.request.body || {};
     await service.game.update(id, payload);
