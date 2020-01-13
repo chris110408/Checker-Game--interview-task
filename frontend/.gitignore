@@ -10,6 +10,9 @@
 # production
 /dist
 
+backend/logs/
+backend/run/
+
 # misc
 .DS_Store
 

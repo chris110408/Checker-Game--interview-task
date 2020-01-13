@@ -1,0 +1,17 @@
+2020-01-12 20:40:42,783 INFO 41860 [egg:logger] init all loggers with options: {"dir":"/Users/leichen/Documents/checker/backend/logs/egg-RESTfulAPI","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"egg-RESTfulAPI-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-01-12 20:40:42,809 INFO 41860 [egg-multipart] stream mode enable
+2020-01-12 20:40:43,179 INFO 41860 [egg-mongoose] connecting mongodb://demoadmin:demoadmin2019@ds331735.mlab.com:31735/demo_2019
+2020-01-12 20:40:43,293 INFO 41860 [egg-static] starting static serve /public/ -> /Users/leichen/Documents/checker/backend/app/public
+2020-01-12 20:40:43,295 INFO 41860 [egg-security] use methodnoallow middleware
+2020-01-12 20:40:43,296 INFO 41860 [egg-security] use noopen middleware
+2020-01-12 20:40:43,298 INFO 41860 [egg-security] use nosniff middleware
+2020-01-12 20:40:43,299 INFO 41860 [egg-security] use xssProtection middleware
+2020-01-12 20:40:43,300 INFO 41860 [egg-security] use xframe middleware
+2020-01-12 20:40:43,301 INFO 41860 [egg-security] use dta middleware
+2020-01-12 20:40:43,301 INFO 41860 [egg-security] compose 6 middlewares into one security middleware
+2020-01-12 20:40:43,313 INFO 41860 [egg:core] dump config after load, 5ms
+2020-01-12 20:40:43,315 INFO 41860 [egg-mongoose] starting...
+2020-01-12 20:40:43,335 INFO 41860 [egg-watcher:application] watcher start success
+2020-01-12 20:40:47,136 INFO 41860 [egg-mongoose] mongodb://demoadmin:demoadmin2019@ds331735.mlab.com:31735/demo_2019 connected successfully
+2020-01-12 20:40:47,137 INFO 41860 [egg-mongoose] instance[0] start successfully
+2020-01-12 20:40:47,145 INFO 41860 [egg:core] dump config after ready, 6ms

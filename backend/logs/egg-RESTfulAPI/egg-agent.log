@@ -1,0 +1,10 @@
+2020-01-12 20:40:42,028 INFO 41859 [egg:logger] init all loggers with options: {"dir":"/Users/leichen/Documents/checker/backend/logs/egg-RESTfulAPI","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"egg-RESTfulAPI-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-01-12 20:40:42,037 INFO 41859 [egg:core] dump config after load, 3ms
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: ["/Users/leichen/Documents/checker/backend/app","/Users/leichen/Documents/checker/backend/config","/Users/leichen/Documents/checker/backend/mocks","/Users/leichen/Documents/checker/backend/mocks_proxy","/Users/leichen/Documents/checker/backend/app.js"]
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: "/Users/leichen/Documents/checker/backend/app"
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: "/Users/leichen/Documents/checker/backend/config"
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: "/Users/leichen/Documents/checker/backend/mocks"
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: "/Users/leichen/Documents/checker/backend/mocks_proxy"
+2020-01-12 20:40:42,094 INFO 41859 [egg-watcher] Start watching: "/Users/leichen/Documents/checker/backend/app.js"
+2020-01-12 20:40:42,095 INFO 41859 [egg-watcher:agent] watcher start success
+2020-01-12 20:40:42,109 INFO 41859 [egg:core] dump config after ready, 4ms

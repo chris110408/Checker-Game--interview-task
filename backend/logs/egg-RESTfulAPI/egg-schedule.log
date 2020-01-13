@@ -1,0 +1,6 @@
+2020-01-12 20:40:42,808 INFO 41860 [egg-schedule]: register schedule /Users/leichen/Documents/checker/backend/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2020-01-12 20:40:42,808 INFO 41860 [egg-schedule]: register schedule /Users/leichen/Documents/checker/backend/node_modules/egg-logrotator/app/schedule/clean_log.js
+2020-01-12 20:40:42,808 INFO 41860 [egg-schedule]: register schedule /Users/leichen/Documents/checker/backend/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2020-01-12 20:40:47,153 INFO 41859 [Timer] /Users/leichen/Documents/checker/backend/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 28152851ms at 2020-01-13 04:30:00.004
+2020-01-12 20:40:47,153 INFO 41859 [Timer] /Users/leichen/Documents/checker/backend/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 11952847ms at 2020-01-13 00:00:00.000
+2020-01-12 20:40:47,153 INFO 41859 [Timer] /Users/leichen/Documents/checker/backend/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 11953847ms at 2020-01-13 00:00:01.000
