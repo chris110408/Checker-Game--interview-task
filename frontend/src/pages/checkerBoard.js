@@ -29,7 +29,7 @@ const GameBoard = ({ gameData, children }) => {
   return <>{RenderBoard(gameData, children)}</>;
 };
 
-Square.propTypes = {
+GameBoard.propTypes = {
   gameData: PropTypes.array,
   children: PropTypes.node,
 };
