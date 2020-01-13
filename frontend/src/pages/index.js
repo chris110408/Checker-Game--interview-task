@@ -3,6 +3,7 @@ import { Card, Icon, Tooltip } from 'antd';
 import PropTypes from "prop-types";
 import GameBoard from "./checkerBoard"
 import generateGameData from "../utils/generateGameData"
+import Piece from "./piece";
 
 
 const Gamedata = generateGameData()
@@ -28,6 +29,7 @@ const CheckerGame = (props)=>{
     >
       <div className={styles.board}>
         <GameBoard gameData={currentData}>
+          <Piece />
         </GameBoard>
       </div>
     </Card>

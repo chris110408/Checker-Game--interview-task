@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 
 
-const Square= ({RowIndex,ColIndex,pieceColor,type})=>{
+const Square= ({RowIndex,ColIndex,pieceColor,type,children})=>{
   const squareColor=(row,col,type)=>{
     if(type){
       if(type==='active'){
@@ -22,6 +22,8 @@ const Square= ({RowIndex,ColIndex,pieceColor,type})=>{
     <div  row={RowIndex} col={ColIndex} key={`${RowIndex}-${ColIndex}`} style={{
       width: '12.5%', height: '12.5%',backgroundColor:`${squareColor(RowIndex,ColIndex,type)}`
     }}>
+      {pieceColor?React.cloneElement(children, { RowIndex: RowIndex, ColIndex: ColIndex ,pieceColor:pieceColor }):null}
+
     </div>
   );
 }
@@ -29,8 +31,9 @@ const Square= ({RowIndex,ColIndex,pieceColor,type})=>{
 Square.propTypes = {
   type: PropTypes.string,
   pieceColor:PropTypes.string,
-  RowIndex:PropTypes.string,
-  ColIndex:PropTypes.string
+  RowIndex:PropTypes.number,
+  ColIndex:PropTypes.number,
+  children: PropTypes.node,
 };
 
 export default Square

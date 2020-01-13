@@ -1,5 +1,8 @@
-import moveImage from '../assets/move.png'
-import React ,{useRef}from 'react';
+
+import React from 'react';
+import PropTypes from "prop-types";
+
+
 const generatePieceColor=(pieceColor)=>{
   return pieceColor==='r'?'red':'black'
 }
@@ -18,7 +21,7 @@ const setPieceShape=(row,pieceColor)=>{
 
 
 
-const Piece = ({row,col,pieceColor})  => {
+const Piece = ({RowIndex,ColIndex,pieceColor})  => {
 
 
 
@@ -28,7 +31,7 @@ const Piece = ({row,col,pieceColor})  => {
     width: '38px',
     position: 'relative',
     top: '5px',
-    borderRadius:setPieceShape(row,pieceColor),
+    borderRadius:setPieceShape(RowIndex,pieceColor),
     backgroundColor:  generatePieceColor(pieceColor),
     cursor: 'move',
   }
@@ -46,4 +49,9 @@ const Piece = ({row,col,pieceColor})  => {
 };
 
 
+Piece.propTypes = {
+  RowIndex:PropTypes.number,
+  ColIndex:PropTypes.number,
+  pieceColor:PropTypes.string
+};
 export default Piece
