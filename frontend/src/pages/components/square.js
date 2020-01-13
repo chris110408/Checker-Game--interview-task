@@ -1,29 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDrop } from 'react-dnd'
+import { useDrop } from 'react-dnd';
 
-const ItemTypes =  {
+const ItemTypes = {
   PIECE: 'PIECE',
-}
+};
 
 const Square = ({ RowIndex, ColIndex, pieceColor, type, children }) => {
-
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept:  ItemTypes.PIECE,
-    drop: () => {console.log('drop')},
+    accept: ItemTypes.PIECE,
+    drop: () => {
+      console.log('drop');
+    },
     collect: monitor => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),
     }),
-  })
-
-
+  });
 
   const squareColor = (row, col, type) => {
     if (type) {
       if (type === 'active') {
         return '#ddca7e';
       }
+
+      return type === 'move' ? '#6a6aff' : '#ccffd5';
     }
     if (row % 2 === 0) {
       return col % 2 ? '#ddd' : '#fff';
