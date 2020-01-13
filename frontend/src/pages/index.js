@@ -6,6 +6,7 @@ import generateGameData from '../utils/generateGameData';
 import Piece from './components/piece';
 import { DndProvider } from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
+import { connect } from 'dva';
 import {
   isKing,
   mutedeleteTypeGameData,
@@ -20,16 +21,29 @@ import {
 import React,{useState,useEffect} from 'react';
 
 const Gamedata = generateGameData();
-const CheckerGame = props => {
-  const [isRedRound,setGameRound] = useState(true)
-  const [currentData,setGameData] = useState([])
+const CheckerGame = ({ dispatch, checker, submittingGameData, gettingGameData}) => {
   const [activePiece, setActivePiece] = useState(null);
 
-
+  const { isRedRound, currentData, gameId } = checker;
   useEffect(() => {
-    setGameData([].concat(Gamedata.game))
-  }, []);
+    dispatch({
+      type: 'checker/getGameData',
+    });
+  }, [dispatch]);
 
+
+  const setGameRound = _isRedRound => {
+    dispatch({
+      type: 'checker/setIsRedRound',
+      payload: _isRedRound,
+    });
+  };
+  const setGameData = _data => {
+    dispatch({
+      type: 'checker/setCurrentData',
+      payload: _data,
+    });
+  };
 
   const reset = () => {};
   const saveGame = () => {};
@@ -146,4 +160,9 @@ const CheckerGame = props => {
   );
 };
 
-export default CheckerGame;
+
+export default connect(({ checker, loading }) => ({
+  checker: checker,
+  submittingGameData: loading.effects['checker/getGameData'],
+  gettingGameData: loading.effects['checker/setGameData'],
+}))(CheckerGame);
