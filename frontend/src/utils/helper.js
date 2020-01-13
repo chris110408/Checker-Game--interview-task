@@ -165,6 +165,10 @@ const _getjumpMoves = (
   jumpFunction,
 ) => {
   if (isMoveAble(nextIntJumpRow, nextIntJumpCol)) {
+    console.log('nextIntJumpRow',nextIntJumpRow)
+    console.log(typeof nextIntJumpRow)
+    console.log('nextIntJumpCol',nextIntJumpCol)
+    console.log(currentData)
     const nextJumpCell = Object.assign({}, currentData[`${nextIntJumpRow}`][`${nextIntJumpCol}`]);
     const { pieceColor: nextJumpPieceColor } = nextJumpCell;
 
@@ -181,6 +185,7 @@ const _getjumpMoves = (
             nextIntJumpRow,
             nextIntJumpCol,
             currentPieceColor,
+            currentData
           );
 
           return currentJumpMoves.concat(nextJump);
@@ -205,6 +210,51 @@ const muteGameData = (combinedMovesObj, currentData) => {
   return newData
 };
 
+const getKillPiecesObject = (dropSquare,activePiece) => {
+  const dropIntRow = parseInt(dropSquare.row);
+  const dropIntCol = parseInt(dropSquare.col);
+  const tempDropObject = Object.assign({}, dropSquare);
+  delete tempDropObject.row;
+  delete tempDropObject.col;
+  tempDropObject.intRow = dropIntRow;
+  tempDropObject.intCol = dropIntCol;
+
+  const killedPieces = [];
+  if (activePiece.pieceColor === 'r') {
+    for (let i = 1; i <= activePiece.intRow - tempDropObject.intRow; i++) {
+      if (i % 2 === 1) {
+        console.log(i);
+        if (activePiece.intCol - tempDropObject.intCol > 0) {
+          killedPieces.push({ intRow: activePiece.intRow - i, intCol: activePiece.intCol - i });
+        }
+        if (activePiece.intCol - tempDropObject.intCol < 0) {
+          killedPieces.push({ intRow: activePiece.intRow - i, intCol: activePiece.intCol + i });
+        }
+      }
+    }
+  }
+  if (activePiece.pieceColor === 'b') {
+    for (let i = 1; i <= tempDropObject.intRow - activePiece.intRow; i++) {
+      if (i % 2 === 1) {
+        if (activePiece.intCol - tempDropObject.intCol > 0) {
+          killedPieces.push({ intRow: activePiece.intRow + i, intCol: activePiece.intCol - i });
+        }
+        if (activePiece.intCol - tempDropObject.intCol < 0) {
+          killedPieces.push({ intRow: activePiece.intRow + i, intCol: activePiece.intCol + i });
+        }
+      }
+    }
+  }
+
+  console.log('killedPieces', killedPieces);
+  return killedPieces.reduce((acc, item) => {
+    acc[`${item.intRow}-${item.intCol}`] = item;
+    return acc;
+  }, {});
+};
+
+
+
 
 export {
   isKing,
@@ -214,5 +264,6 @@ export {
   getDirectMoves,
   getLeftjumpMoves,
   getRightjumpMoves,
-  _getjumpMoves,muteGameData
+  _getjumpMoves,muteGameData,
+  getKillPiecesObject
 };

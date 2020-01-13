@@ -14,7 +14,8 @@ import {
   getDirectMoves,
   getLeftjumpMoves,
   getRightjumpMoves,
-  muteGameData
+  muteGameData,
+  getKillPiecesObject
 } from "../utils/helper"
 import React,{useState,useEffect} from 'react';
 
@@ -33,6 +34,9 @@ const CheckerGame = props => {
   const reset = () => {};
   const saveGame = () => {};
 
+  const switchRound = () => {
+    setGameRound(!isRedRound);
+  };
 
   const showPossibleMove =(intRow, intCol, pieceColor)=>{
     const _isKing = isKing(intRow, pieceColor);
@@ -52,6 +56,7 @@ const CheckerGame = props => {
     const possibleMoves = getPossibleMoves(intRow, intCol, pieceColor,currentData);
     const jumpableMoves = getJumpableMoves(possibleMoves);
     const jumpMoves = jumpableMoves.reduce((acc, jumpableMove) => {
+      console.log(currentData)
       //>0 left move <0 right move
       if (intCol - jumpableMove.intCol > 0) {
         return acc.concat(getLeftjumpMoves([], intRow, intCol, pieceColor,currentData));
@@ -80,6 +85,41 @@ const CheckerGame = props => {
 
   }
 
+  const dropPiece = (type, RowIndex, ColIndex) => {
+    //!
+    let killedPiecesObject = {};
+    const dropSquare = Object.assign({}, currentData[`${RowIndex}`][`${ColIndex}`]);
+
+    if (type === 'jump') {
+      killedPiecesObject = getKillPiecesObject(dropSquare,activePiece);
+    }
+
+    console.log(killedPiecesObject);
+    _executeMoves(killedPiecesObject, RowIndex, ColIndex);
+  };
+  const _executeMoves = (killedPiecesObject, DropRowIndex, DropColIndex) => {
+    const newGameData =  mutedeleteTypeGameData(currentData);
+
+    newGameData.forEach(rowData => {
+      rowData.map(item => {
+        const key = `${item.row}-${item.col}`;
+
+        if (killedPiecesObject[`${key}`] || key === activePiece.key) {
+          item.pieceColor = null;
+        }
+
+        item.type = null;
+      });
+    });
+
+    newGameData[DropRowIndex][DropColIndex].pieceColor = activePiece.pieceColor;
+
+    setGameData([].concat(newGameData));
+
+    switchRound();
+  };
+
+
   return (
     <Card
       actions={[
@@ -93,9 +133,11 @@ const CheckerGame = props => {
     >
       <DndProvider backend={Backend}>
         <div className={styles.board}>
-          <GameBoard gameData={currentData}>
+          <GameBoard dropPiece={dropPiece} gameData={currentData}>
             <Piece
               showPossibleMove={showPossibleMove}
+              activePiece={activePiece}
+              isRedRound={isRedRound}
             />
           </GameBoard>
         </div>

@@ -6,12 +6,11 @@ const ItemTypes = {
   PIECE: 'PIECE',
 };
 
-const Square = ({ RowIndex, ColIndex, pieceColor, type, children }) => {
+const Square = ({ dropPiece,RowIndex, ColIndex, pieceColor, type, children }) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.PIECE,
-    drop: () => {
-      console.log('drop');
-    },
+    canDrop: () =>  {return type && type!=='active'},
+    drop: () => {dropPiece(type,RowIndex,ColIndex)},
     collect: monitor => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),
@@ -63,6 +62,7 @@ Square.propTypes = {
   RowIndex: PropTypes.number,
   ColIndex: PropTypes.number,
   children: PropTypes.node,
+  dropPiece:PropTypes.func
 };
 
 export default Square;
